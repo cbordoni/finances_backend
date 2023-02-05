@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  app:
+    tty: true
+    image: finances-backend
+    build:
+      context: ./
+    command: yarn run start:dev
+    volumes:
+      - ./:/home/node/app/
+      - node_modules:/home/node/app/node_modules
+    ports:
+      - 3000:3000
+    depends_on: 
+      mysql:
+        condition: service_started
+    links:
+      - mysql
+
+  mysql:  
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    environment:
+      MYSQL_TCP_PORT: ${MYSQL_PORT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_NAME}
+    volumes:
+      - database_dumps:/var/lib/mysql
+
+volumes:
+  node_modules:
+  database_dumps:
