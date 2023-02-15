@@ -1,0 +1,29 @@
+name: Typescript lint, build and test
+
+on:
+  push:
+    branches-ignore:
+      - master
+      - main
+
+jobs:
+  lint-build-test:
+    name: Lint, build and test
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn ci
+      - run: yarn install -g @nestjs/cli
+      - run: yarn build --if-present
+      - run: yarn lint --if-present
+      - run: yarn test
