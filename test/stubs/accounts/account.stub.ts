@@ -17,6 +17,7 @@ export class AccountRepositoryStub {
       createdAt: new Date('2023-02-05T15:18:49.000Z'),
       updatedAt: new Date('2023-02-05T15:18:49.000Z'),
       deletedAt: null,
+      incomes: [],
     },
   ];
 
