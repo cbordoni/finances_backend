@@ -1,5 +1,13 @@
 import { instanceToPlain, plainToClass } from 'class-transformer';
-import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Income } from 'src/incomes/entities/income.entity';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { CreateAccountDto } from '../dto/create-account.dto';
 import { UpdateAccountDto } from '../dto/update-account.dto';
 
@@ -34,9 +42,13 @@ export class Account {
 
   @Column('datetime', { name: 'updated_at', default: () => 'NOW()' })
   updatedAt: Date;
-  
-  @DeleteDateColumn()
+
+  @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
+
+  @OneToMany(() => Income, (income) => income.id)
+  @JoinColumn({ name: 'income_id' })
+  incomes: Income[];
 
   static toModel(accountDto: CreateAccountDto | UpdateAccountDto): Account {
     const data = instanceToPlain(accountDto);

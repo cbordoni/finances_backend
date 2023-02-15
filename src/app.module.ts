@@ -7,6 +7,8 @@ import { AccountsService } from './accounts/accounts.service';
 import { Account } from './accounts/entities/account.entity';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { Income } from './incomes/entities/income.entity';
+import { IncomesModule } from './incomes/incomes.module';
 
 @Module({
   imports: [
@@ -18,11 +20,12 @@ import { AppService } from './app.service';
       database: process.env.MYSQL_NAME,
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_USER_PASS,
-      entities: [Account],
+      entities: [Account, Income],
       synchronize: process.env.NODE_ENV === 'development',
     }),
-    TypeOrmModule.forFeature([Account]),
+    TypeOrmModule.forFeature([Account, Income]),
     AccountsModule,
+    IncomesModule,
   ],
   controllers: [AppController, AccountsController],
   providers: [AppService, AccountsService],
