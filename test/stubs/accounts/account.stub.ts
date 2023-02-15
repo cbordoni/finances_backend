@@ -52,7 +52,7 @@ export class AccountRepositoryStub {
     return this._accounts.at(0);
   }
 
-  get token(): string | Function {
+  get token() {
     return getRepositoryToken(Account);
   }
 

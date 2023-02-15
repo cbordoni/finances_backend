@@ -6,7 +6,6 @@ import { IncomesService } from './incomes.service';
 describe('IncomesController', () => {
   const incomeStub = new IncomeRepositoryStub();
   let controller: IncomesController;
-  let service: IncomesService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -21,7 +20,6 @@ describe('IncomesController', () => {
     }).compile();
 
     controller = module.get<IncomesController>(IncomesController);
-    service = module.get<IncomesService>(IncomesService);
   });
 
   it('should be defined', () => {

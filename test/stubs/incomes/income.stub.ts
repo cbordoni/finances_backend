@@ -47,7 +47,7 @@ export class IncomeRepositoryStub {
     return this._incomes.at(0);
   }
 
-  get token(): string | Function {
+  get token() {
     return getRepositoryToken(Income);
   }
 
