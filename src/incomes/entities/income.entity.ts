@@ -5,7 +5,8 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne, PrimaryGeneratedColumn
+  ManyToOne,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CreateIncomeDto } from '../dto/create-income.dto';
 import { UpdateIncomeDto } from '../dto/update-income.dto';
