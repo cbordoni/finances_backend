@@ -39,7 +39,7 @@ export class CreateIncomeDto {
     return value;
   })
   @IsBoolean()
-  confirmed: boolean = false;
+  confirmed = false;
 
   @IsOptional()
   @Transform(({ value }) => Number.parseInt(value))
@@ -52,5 +52,5 @@ export class CreateIncomeDto {
     return value;
   })
   @IsBoolean()
-  ignoreOnTotals: boolean = false;
+  ignoreOnTotals = false;
 }

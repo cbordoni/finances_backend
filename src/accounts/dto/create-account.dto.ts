@@ -1,11 +1,12 @@
 import { Transform } from 'class-transformer';
 import {
-  IsBoolean, IsNotEmpty,
+  IsBoolean,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
   MaxLength,
-  MinLength
+  MinLength,
 } from 'class-validator';
 
 export class CreateAccountDto {
@@ -18,12 +19,12 @@ export class CreateAccountDto {
   @IsOptional()
   @Transform(({ value }) => Number.parseFloat(value))
   @IsNumber({ maxDecimalPlaces: 2 })
-  openingBalance: number = 0.0;
+  openingBalance = 0.0;
 
   @IsOptional()
   @Transform(({ value }) => Number.parseFloat(value))
   @IsNumber({ maxDecimalPlaces: 2 })
-  bankOverdraft: number = 0.0;
+  bankOverdraft = 0.0;
 
   @IsOptional()
   @IsString()
@@ -36,7 +37,7 @@ export class CreateAccountDto {
     return value;
   })
   @IsBoolean()
-  defaultToBeDiscounted: boolean = false;
+  defaultToBeDiscounted = false;
 
   @IsOptional()
   @Transform(({ value }) => {
@@ -45,7 +46,7 @@ export class CreateAccountDto {
     return value;
   })
   @IsBoolean()
-  toDisplayOnDashboard: boolean = true;
+  toDisplayOnDashboard = true;
 
   @IsOptional()
   @Transform(({ value }) => {
@@ -54,5 +55,5 @@ export class CreateAccountDto {
     return value;
   })
   @IsBoolean()
-  toSumOnTotals: boolean = true;
+  toSumOnTotals = true;
 }

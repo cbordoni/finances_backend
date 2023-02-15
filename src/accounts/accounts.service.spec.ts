@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccountRepositoryStub } from 'test/stubs/accounts/account.stub';
 import { AccountsService } from './accounts.service';
-import { Account } from './entities/account.entity';
 
 describe('AccountsService', () => {
   const accountStub = new AccountRepositoryStub();

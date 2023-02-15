@@ -22,8 +22,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn ci
-      - run: yarn install -g @nestjs/cli
-      - run: yarn build --if-present
-      - run: yarn lint --if-present
+      - run: yarn global add @nestjs/cli
+      - run: yarn install
+      - run: yarn build
+      - run: yarn lint
       - run: yarn test

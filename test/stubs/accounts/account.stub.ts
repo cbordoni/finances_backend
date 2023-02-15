@@ -17,6 +17,7 @@ export class AccountRepositoryStub {
       createdAt: new Date('2023-02-05T15:18:49.000Z'),
       updatedAt: new Date('2023-02-05T15:18:49.000Z'),
       deletedAt: null,
+      incomes: [],
     },
   ];
 
@@ -51,7 +52,7 @@ export class AccountRepositoryStub {
     return this._accounts.at(0);
   }
 
-  get token(): string | Function {
+  get token() {
     return getRepositoryToken(Account);
   }
 

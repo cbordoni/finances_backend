@@ -1,16 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { validate } from 'class-validator';
 import { AccountRepositoryStub } from 'test/stubs/accounts/account.stub';
 import { AccountsController } from './accounts.controller';
 import { AccountsService } from './accounts.service';
 
-describe('AppController', () => {
+describe('AccountsController', () => {
   let controller: AccountsController;
-  let service: AccountsService;
   const accountStub = new AccountRepositoryStub();
 
   beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
+    const module: TestingModule = await Test.createTestingModule({
       controllers: [AccountsController],
       providers: [
         AccountsService,
@@ -21,47 +19,38 @@ describe('AppController', () => {
       ],
     }).compile();
 
-    controller = app.get<AccountsController>(AccountsController);
-    service = app.get<AccountsService>(AccountsService);
+    controller = module.get<AccountsController>(AccountsController);
   });
 
-  describe('findAll', () => {
-    it('should return an array of accounts', async () => {
-      expect(await controller.findAll()).toMatchObject(accountStub.accounts);
-    });
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
   });
 
-  describe('findOne', () => {
-    it('should return an specific account', async () => {
-      expect(
-        await controller.findOne(accountStub.first.id.toString()),
-      ).toMatchObject(accountStub.first);
-    });
+  it('should return an array of accounts', async () => {
+    expect(await controller.findAll()).toMatchObject(accountStub.accounts);
   });
 
-  describe('create', () => {
-    it('should create an accounts', async () => {
-      const createDto = accountStub.createDto;
-      expect(await controller.create(createDto)).toMatchObject(createDto);
-    });
+  it('should return an specific account', async () => {
+    expect(
+      await controller.findOne(accountStub.first.id.toString()),
+    ).toMatchObject(accountStub.first);
   });
 
-  describe('update', () => {
-    it('should update an account', async () => {
-      const updateDto = accountStub.updateDto;
-      expect(await controller.update(updateDto.id.toString(), updateDto)).toBe(
-        1,
-      );
-    });
+  it('should create an accounts', async () => {
+    const createDto = accountStub.createDto;
+    expect(await controller.create(createDto)).toMatchObject(createDto);
   });
 
-  describe('remove', () => {
-    it('should remove an account', async () => {
-      const removedAccount = await controller.remove(
-        accountStub.first.id.toString(),
-      );
+  it('should update an account', async () => {
+    const updateDto = accountStub.updateDto;
+    expect(await controller.update(updateDto.id.toString(), updateDto)).toBe(1);
+  });
 
-      expect(removedAccount.deletedAt).not.toBeNull();
-    });
+  it('should remove an account', async () => {
+    const removedAccount = await controller.remove(
+      accountStub.first.id.toString(),
+    );
+
+    expect(removedAccount.deletedAt).not.toBeNull();
   });
 });
